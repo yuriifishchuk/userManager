@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Edit User with ID: {{data.id}}</h1>
+  <form [formGroup]="editForm">
+    <mat-form-field>
+      <input matInput placeholder="First Name" type="text" formControlName="firstName">
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Last Name" type="text" formControlName="lastName">
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Email" type="email" formControlName="email">
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password">
+    </mat-form-field><br>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [disabled]="editForm.invalid" type="submit" (click)="edit()">Edit</button>
+  </form>
+
