@@ -4,13 +4,19 @@
   <mat-card-content>
     <form [formGroup]="loginForm" (ngSubmit)="submit()">
       <mat-form-field>
-        <input matInput formControlName="email" placeholder="Email">
+        <input matInput formControlName="email" placeholder="Email" required>
+        <mat-error *ngIf="loginForm.controls.email.hasError('pattern')"> 
+          Please enter a valid email address
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
-          <input matInput formControlName="password" placeholder="Password" type="password">
-      </mat-form-field><br>
+        <input matInput formControlName="password" placeholder="Password" type="password" required>
+        <mat-hint>Password must have at least 4 chars</mat-hint>
+      </mat-form-field>
+      <br>
       <button mat-button type="submit" [disabled]="loginForm.invalid">Log in</button>
     </form>
+    <div *ngIf="isLogged">Email or password is incorrect</div>
   </mat-card-content>
 </mat-card>
 </div>

@@ -3,6 +3,7 @@ h1 {
 }
 table {
     width: 70%;
+    margin-bottom: 30px;
 }
 .flex {
     display: flex;

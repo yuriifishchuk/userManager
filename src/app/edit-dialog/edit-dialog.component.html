@@ -1,16 +1,21 @@
 <h1 mat-dialog-title>Edit User with ID: {{data.id}}</h1>
   <form [formGroup]="editForm">
     <mat-form-field>
-      <input matInput placeholder="First Name" type="text" formControlName="firstName">
+      <input matInput placeholder="First Name" type="text" formControlName="firstName" required>
+      <mat-error *ngIf="editForm.controls.firstName.invalid">You must enter a value</mat-error>
     </mat-form-field><br>
     <mat-form-field>
-      <input matInput placeholder="Last Name" type="text" formControlName="lastName">
+      <input matInput placeholder="Last Name" type="text" formControlName="lastName" required>
+      <mat-error *ngIf="editForm.controls.lastName.invalid">You must enter a value</mat-error>
     </mat-form-field><br>
     <mat-form-field>
-      <input matInput placeholder="Email" type="email" formControlName="email">
+      <input matInput placeholder="Email" type="email" formControlName="email" required>
+      <mat-error *ngIf="editForm.controls.email.invalid">Enter valid email</mat-error>
     </mat-form-field><br>
     <mat-form-field>
-      <input matInput placeholder="Password" formControlName="password">
+      <input matInput placeholder="Password" formControlName="password" required>
+      <mat-hint>Password must have at least 4 chars</mat-hint>
+      <mat-error *ngIf="editForm.controls.password.invalid">You must enter a value</mat-error>
     </mat-form-field><br>
     <button mat-button (click)="onNoClick()">Cancel</button>
     <button mat-button [disabled]="editForm.invalid" type="submit" (click)="edit()">Edit</button>

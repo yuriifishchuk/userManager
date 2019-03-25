@@ -16,15 +16,16 @@ export class AuthService {
         if (this.loggedIn) {
           localStorage.setItem('isUser', 'true');
           localStorage.setItem('firstName', user.firstName);
-          break;
-        } else {
-          localStorage.setItem('isUser', 'false');
+          return false;
         }
     }
+    localStorage.setItem('isUser', 'false');
+    return true;
   }
 
   logout() {
     localStorage.setItem('isUser', 'false');
+    this.loggedIn = false;
     localStorage.removeItem('firstName');
     this.router.navigate(['/']);
   }

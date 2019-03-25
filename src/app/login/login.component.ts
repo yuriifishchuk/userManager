@@ -8,12 +8,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [UserService, AuthService]
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  isLogged = false;
   users: User[] = [];
   constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
 
@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.authService.checkUser(this.users, this.loginForm.controls.email.value, this.loginForm.controls.password.value);
+    console.log(this.isLogged);
+    
+    this.isLogged = this.authService.checkUser(this.users, this.loginForm.controls.email.value, this.loginForm.controls.password.value);
     this.router.navigate(['/users']);
   }
 

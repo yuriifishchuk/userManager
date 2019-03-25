@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { AuthService } from '../services/auth.service';
-import { MatTable } from '@angular/material';
+import { MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-admin',
@@ -15,16 +15,21 @@ import { MatTable } from '@angular/material';
 })
 export class AdminComponent implements OnInit {
 
-  @ViewChild(MatTable) table: MatTable<any>;
+  @ViewChild(MatSort) sort: MatSort;
   userName: string;
   users: User[] = [];
+  dataSource;
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'password', 'action'];
 
   constructor(private userService: UserService, private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.userName = localStorage.getItem('firstName');
-    this.userService.getUsers().subscribe((data: User[]) => this.users = data);
+    this.userService.getUsers().subscribe((data: User[]) => {
+      this.users = data;
+      this.dataSource = new MatTableDataSource(this.users);
+      this.dataSource.sort = this.sort;
+    });
   }
 
   openEditDialog(user: User): void {
@@ -39,15 +44,13 @@ export class AdminComponent implements OnInit {
         user.lastName = res.lastName;
         user.email = res.email;
         user.password = res.password;
-        this.userService.editUser(user).subscribe();
+        this.userService.editUser(user).subscribe(() => this.refresh());
       }
     });
   }
 
   deleteUser(user: User, index) {
-    this.users.splice(index, 1);
-    this.userService.deleteUser(user.id).subscribe();
-    this.table.renderRows();
+    this.userService.deleteUser(user.id).subscribe(() => this.refresh());
   }
 
   addUser() {
@@ -64,10 +67,16 @@ export class AdminComponent implements OnInit {
           email: res.email,
           password: res.password
         };
-        this.users.push(newUser);
-        this.userService.createUser(newUser).subscribe();
-        this.table.renderRows();
+
+        this.userService.createUser(newUser).subscribe(() => this.refresh());
       }
+    });
+  }
+
+  refresh() {
+    this.userService.getUsers().subscribe((data: User[]) => {
+      this.users = data;
+      this.dataSource = new MatTableDataSource(this.users);
     });
   }
 

@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate, CanLoad {
     checkLogin(): boolean {
         const isloggedIn = localStorage.getItem('isUser');
         if (isloggedIn === 'true') { return true; }
-        console.log(isloggedIn);
         this.router.navigate(['/']);
         return false;
     }

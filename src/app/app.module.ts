@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // tslint:disable-next-line:max-line-length
-import { MatInputModule, MatDialogModule, MatButtonModule, MatCardModule, MatListModule, MatTableModule, MatMenuModule, MatIconModule } from '@angular/material';
+import { MatInputModule, MatSortModule, MatDialogModule, MatButtonModule, MatCardModule, MatListModule, MatTableModule, MatMenuModule, MatIconModule } from '@angular/material';
 import { AdminComponent } from './admin/admin.component';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
@@ -39,7 +39,8 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
     MatTableModule,
     MatMenuModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSortModule
   ],
   entryComponents: [
     EditDialogComponent,

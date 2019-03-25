@@ -31,4 +31,10 @@ export class AddDialogComponent implements OnInit {
     });
   }
 
+  getEmailErrorMessage() {
+    return this.addForm.controls.email.hasError('required') ? 'You must enter a value' :
+        this.addForm.controls.email.hasError('email') ? 'Not a valid email' :
+            '';
+  }
+
 }
