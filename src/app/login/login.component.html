@@ -16,7 +16,7 @@
       <br>
       <button mat-button type="submit" [disabled]="loginForm.invalid">Log in</button>
     </form>
-    <div *ngIf="isLogged">Email or password is incorrect</div>
+    <div *ngIf="!isLogged">Email or password is incorrect</div>
   </mat-card-content>
 </mat-card>
 </div>

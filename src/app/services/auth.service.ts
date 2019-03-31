@@ -5,29 +5,23 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
+  constructor(private http: HttpClient, private router: Router) {}
 
-  public loggedIn = false;
-
-  constructor(private http: HttpClient, private router: Router) { }
-
-  checkUser(userList: User[], email: string, pass: string) {
+  isUser(userList: User[], email: string, pass: string): boolean {
     for (const user of userList) {
-        this.loggedIn = (user.email === email && user.password === pass) ? true : false;
-        if (this.loggedIn) {
-          localStorage.setItem('isUser', 'true');
-          localStorage.setItem('firstName', user.firstName);
-          return false;
-        }
+      if (user.email === email && user.password === pass) {
+        localStorage.setItem('isUser', 'true');
+        localStorage.setItem('firstName', user.firstName);
+        return true;
+      }
     }
     localStorage.setItem('isUser', 'false');
-    return true;
+    return false;
   }
 
   logout() {
     localStorage.setItem('isUser', 'false');
-    this.loggedIn = false;
     localStorage.removeItem('firstName');
     this.router.navigate(['/']);
   }
-
 }

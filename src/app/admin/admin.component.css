@@ -1,13 +1,54 @@
 h1 {
-    text-align: center;
-}
-table {
-    width: 70%;
-    margin-bottom: 30px;
+  text-align: center;
 }
 .flex {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-form-field {
+  font-size: 14px;
+}
+
+th, td {
+    width: 33%;
+}
+
+td:last-child {
+    text-align: right;
+}
+
+th:last-child {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-elevation-z8 {
+    margin-bottom: 30px;
+    width: 50%;
+}
+
+mat-icon-button {
+    float: left;
+}
+
+.btn_bar {
+  width: 50%;
+}
+
+.add_btn {
+  width: 20%;
+  margin-right: 5%;
+}
+
+.filter {
+  width: 75%;
+}
+.logout {
+  margin-bottom: 50px;
 }
